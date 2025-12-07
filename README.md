@@ -101,7 +101,7 @@ To complete network setup, I identified my network device using `ip link`. Then 
 `systemctl start systemd-networkd`
 `systemctl start systemd-resolved`
 Next, I configured DHCP with `mkdir -p /etc/systemd/network` and edited `/etc/systemd/network/20-wired.network` to include my interface name `eth0`. I added 
-`[Match]
+`[Match]`
 `Name=eth0`
 `[Network]`
 `DHCP=yes`
