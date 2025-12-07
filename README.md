@@ -73,9 +73,9 @@ To correct region and language specific formatting, I tried to run `nano locale-
 I typed `vim /etc/locale-gen` into the console. The file opened. I uncommented out the line saying `en_US.UTF-8 UTF-8`. I generated the locale with `locale-gen`. I set the system locale by opening the locale configuration file using `vim /etc/locale.conf` and setting the LANG variable to `en_US.UTF-8` with `LANG=en_US.UTF-8`.
 
 At this point, I also realized I was in the live environment instead of the installed system. So I remounted my system with 
-`mount /dev/vda2 /mnt
+`mount /dev/vda2 /mnt`
 `mount /dev/vda1 /mnt/boot`
-Then I entered the installed system with `arch-chroot /mnt`. Next, I changed my timezone (since I have changed my timezone ever since starting this project) using `ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime` and `timedatectl set-ntp true`, and ran `hwclock --systohc`. I tried re-edited locale.gen to uncomment `en_US.UTF-8 UTF-8` but `vim` was not installed. In this moment everything clicked. 
+Then I entered the installed system with `arch-chroot /mnt`. Next, I changed my timezone (since I have changed my timezone ever since starting this project) using `ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime` and `timedatectl set-ntp true`, and ran `hwclock --systohc`. I tried re-editing `locale.gen` to uncomment `en_US.UTF-8 UTF-8` but `vim` was not installed. In this moment everything clicked. 
 
 I was supposed to install the other essential packages in the previous step.
 
