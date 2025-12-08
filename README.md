@@ -233,7 +233,7 @@ No but actually the real way to color the terminal is to run `vim ~/.bashrc` and
 Also since I changed this disk to be the first drive in the list of Drives in the VM configuration, it already automatically boots into the GUI desktop environment.
 
 **Step 12: Add Some Aliases**
-I added `alias fresh='pacman -Syu'`. I also added `alias c='clear'` and `alias h='history` .
+I added `alias fresh='pacman -Syu'`. I also added `alias c='clear'` and `alias h='history` . I added these alias to the `~/.bashrc` file to make them permanent.
 
 **Step 13: Install Browser**
 I forgot to install a browser earlier, so I did it now using `pacman -S firefox`.
