@@ -1,4 +1,6 @@
 ---
+title: "Project 1- Arch Linux Installation"
+permalink: /archlinux
 ---
 
 # Project 1- Arch Linux Installation
