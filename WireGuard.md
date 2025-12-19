@@ -1,4 +1,4 @@
-**Project 3- Wireguard Lab**
+# Project 3- Wireguard Lab
 
 
 **Step 1: Create a Digital Ocean Account**
