@@ -7,7 +7,7 @@ permalink: /wireguard
 
 
 **Step 1: Create a Digital Ocean Account**<br>
-I set up an account using https://m.do.co/c/d33d59113ab6.
+I set up an account using `https://m.do.co/c/d33d59113ab6`.
 
 **Step 2: Create an Ubuntu 24.04 Droplet**<br>
 I selected the Region and Datacenter closest to me, San Francisco.
@@ -25,7 +25,7 @@ I installed Docker using the command `curl -sSL https://get.docker.com | sh`.
 I created a directory to store the Docker Compose file to run WireGuard using `sudo mkdir -p /opt/stacks/wireguard` and changed directories into it.
 
 **Step 5: Generate a WG-Easy Password Hash**<br>
-I wanted to use the WG-Easy container to manage my VPN through a web interface. To generate a hash for the password I intend to use to access the WG-Easy web interface, I ran the command `docker run --rm -it ghcr.io/wg-easy/wg-easy wgpw '<PASSWORD>'`, replacing `<PASSWORD>` with an actual password I created.
+I wanted to use the WG-Easy container to manage my VPN through a web interface. To generate a hash for the password I intend to use to access the WG-Easy web interface, I ran the command `docker run --rm -it ghcr.io/wg-easy/wg-easy wgpw '<PASSWORD>'`, replacing `<PASSWORD>` with the actual password I created.
 
 **Step 6: Create the Docker Compose File**<br>
 With nano, I wrote the `compose.yaml` file. In it, I wrote
@@ -35,7 +35,7 @@ With nano, I wrote the `compose.yaml` file. In it, I wrote
 To start up WireGuard, I ran `docker compose up -d`.
 
 **Step 9: Access the WireGuard Docker Container Web Interface**<br>
-To access the WG-Easy web interface, I went to `http://<IPADDRESS>:51821`, replacing `<IPADDRESS>` with the IP address of my Ubuntu image.
+To access the WG-Easy web interface, I went to `http://143.110.133.148:51821`.
 
 I logged into the web interface using the password I set earlier. Then I created a new client and named it.
 
