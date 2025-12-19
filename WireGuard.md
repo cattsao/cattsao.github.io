@@ -1,6 +1,8 @@
+---
 layout: page
 title: "Project 3- WireGuard Lab"
 permalink: /wireguard
+---
 
 # Project 3- Wireguard Lab
 
