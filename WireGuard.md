@@ -28,30 +28,8 @@ I created a directory to store the Docker Compose file to run WireGuard using `s
 I wanted to use the WG-Easy container to manage my VPN through a web interface. To generate a hash for the password I intend to use to access the WG-Easy web interface, I ran the command `docker run --rm -it ghcr.io/wg-easy/wg-easy wgpw '<PASSWORD>'`, replacing `<PASSWORD>` with an actual password I created.
 
 **Step 6: Create the Docker Compose File**<br>
-With nano, I wrote the `compose.yaml` file. I wrote in 
-`services:`
-`  wg-easy:`
-   ` container_name: wg-easy`
-    `image: ghcr.io/wg-easy/wg-easy`
-
-    `environment:`
-      `- <PASSWORD_HASH>`
-      `- WG_HOST=<IPADDRESS>`
-
-    `volumes:`
-      `- ./config:/etc/wireguard`
-      `- /lib/modules:/lib/modules`
-    `ports:`
-      `- "51820:51820/udp"`
-      `- "51821:51821/tcp"`
-    `restart: unless-stopped`
-    `cap_add:`
-      `- NET_ADMIN`
-      `- SYS_MODULE`
-    `sysctls:`
-      `- net.ipv4.ip_forward=1`
-      `- net.ipv4.conf.all.src_valid_mark=1`
-In the place of `<PASSWORD_HASH>` I put my WG-Easy password hash with an extra $ after each instance of $. In the place of `<IPADDRESS>` I put the external IP address of my Ubuntu image.
+With nano, I wrote the `compose.yaml` file. In it, I wrote
+![wahhh](compose.png)
 
 **Step 8: Start up the WireGuard Container**<br>
 To start up WireGuard, I ran `docker compose up -d`.
