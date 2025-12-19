@@ -8,7 +8,7 @@ permalink: /archlinux
 
 
 **Step 1: Acquire Image**<br>
-I acquired an installation image from https://release.archboot.com/aarch64/latest/iso/ since I have a Mac.
+I acquired an installation image from `https://release.archboot.com/aarch64/latest/iso/` since I have a Mac.
 
 To verify the image signature, I downloaded the b2sum signature for the ISO and installed b2sum by typing the command `brew install b2sum` into the terminal. I then used the `b2sum path/to/image` command to verify the signature. 
 
