@@ -1,5 +1,7 @@
 # Project 1- Arch Linux Installation
 
+<a href="wireguard.html">Project 3- WireGuard Lab</a>
+
 **Step 1: Acquire Image**
 I acquired an installation image from https://release.archboot.com/aarch64/latest/iso/ since I have a Mac.
 
