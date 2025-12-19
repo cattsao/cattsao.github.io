@@ -2,5 +2,5 @@
 
 Welcome! On this website you can find extensive proof of my suffering... have fun reading through all of it!
 
-![wahhh](fghjkl_Intro_3.jpg)
+![wahhh](bruh.png)
 
