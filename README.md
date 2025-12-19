@@ -1,5 +1,3 @@
-# Project Documentation Links
+# Catherine Tsaowimonsiri System Administration Documentation
 
-<a href="archlinux.html">Project 1- Arch Linux Installation</a>
-
-<a href="wireguard.html">Project 3- WireGuard Lab</a>
+Welcome! On this website you can find extensive proof of my suffering... have fun reading through all of it!
