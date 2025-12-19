@@ -7,7 +7,7 @@ permalink: /archlinux
 
 
 
-**Step 1: Acquire Image**
+**Step 1: Acquire Image**<br>
 I acquired an installation image from https://release.archboot.com/aarch64/latest/iso/ since I have a Mac.
 
 To verify the image signature, I downloaded the b2sum signature for the ISO and installed b2sum by typing the command `brew install b2sum` into the terminal. I then used the `b2sum path/to/image` command to verify the signature. 
@@ -21,7 +21,7 @@ I downloaded the most updated installation image and verified that one instead.
 
 The signature matched!
 
-**Step 2: Bootloading**
+**Step 2: Bootloading**<br>
 I went onto UTM, created a custom operating system, pointed the current boot device to CD/DVD Image, booted the acquired ISO image, and selected Legacy Hardware. For hardware, I gave it 2048 MiB of memory and 2 cores to support a desktop environment. For storage I gave it 4 GiB. I did not select any directory to be made accessible within the VM.
 
 Once I opened the VM, the bootloader did not appear. The only words displayed were "Display output is not active." I realized that legacy hardware would probably not work for Apple Silicon, so I deleted the VM and made a new one using the above configuration but without selecting Legacy Hardware. This worked!
@@ -30,12 +30,12 @@ However, once I opened the virtual console, "Display output is not active" appea
 
 I finally got a chance to verify the boot mode by typing `cat /sys/firmware/efi/fw_platform_size` into the virtual console. It returned `64`, indicating the system has a 64-bit x64 UEFI.
 
-**Step 3: Connecting to Internet**
+**Step 3: Connecting to Internet**<br>
 To ensure my network interface is listed and enabled, I ran the `ip link` command. Then I ran the commands `systemctl restart systemd-networkd` and `systemctl status systemd-networkd` to request an IP address with DHCP. I verified the connection using the `ping ping.archlinux.org` command.
 
 To ensure the system clock was synchronized, I used the command `timedatectl`. 
 
-**Step 4: Partition Disks**
+**Step 4: Partition Disks**<br>
 To identify the block devices, I ran the command `fdisk -l`. To create EFI system and root partitions for the disk, I used the command `fdisk /dev/vda`.
 I typed `g` to create a new GPT disklabel, typed `n` to create each partition, and gave the EFI system partition `+512M` of space.
 
@@ -43,7 +43,7 @@ I then formatted each partition to their appropriate file systems. I formatted t
 
 Finally, I mounted the file systems using the `mount /dev/vda2 /mnt` to mount the root partition to `/mnt` and `mount --mkdir /dev/vda1 /mnt/boot` to mount the EFI system partition to `/mnt/boot`.
 
-**Step 5: Installing Essential Packages**
+**Step 5: Installing Essential Packages**<br>
 I checked my mirrorlist using `cat /etc/pacman.d/mirrorlist` and edited it to include all US servers using `nano /etc/pacman.d/mirrorlist`.
 
 I tried to install essential packages using `pacstrap -K /mnt base linux linux-firmware xfsprogs btrfs-progs e2fsprogs dosfstools lvm2 dhcpcd networkmanager network-manager-applet nano man-db man-pages texinfo` but it failed... In the process of trying to figure out what went wrong the console started throwing a wall of kernel messages and I had to restart and remount my filesystems. For some reason, `/dev/vda1` was mounted to `/boot` and `/dev/vda2` was mounted to `/`. I used `umount /boot` to unmount `/dev/vda1` from `/boot` and tried using `umount /` to unmount `/dev/vda2` from `/` but that didn't work so I had to restart the VM to restore the correct root filesystem. I remounted `/dev/vda2` and `/dev/vda1` using the commands from Step 4. Then I updated the database with `pacman -Sy`. I tried installing the base system with `pacstrap -K /mnt base linux linux-firmware` but it failed. To check if `/mnt` contains files from the initial failed install, I ran `ls -R /mnt | head`. Since it did end up containing files from the failed install, I ran `umount -R /mnt`
@@ -64,7 +64,7 @@ These worked. So I ran `pacstrap -K /mnt linux linux-firmware` again. It still f
 
 At this point, I was ready to move on from installing essential packages. I decided that it was okay to not install anything other than `base` and `linux`, and that I could always install other packages if needed later.
 
-**Step 6: Configure the System**
+**Step 6: Configure the System**<br>
 To get necessary file systems mounted on startup, I generated an `fstab` file using `genfstab -U /mnt >> /mnt/etc/fstab`.
 
 Then I changed root into the new system using `arch-chroot /mnt`.
@@ -94,10 +94,10 @@ all that time...wastedddddddd
 
 Anyway,
 
-**Step 5 part 2**
+**Step 5 part 2**<br>
 I exited the chroot and installed `vim` using `pacstrap -K /mnt vim`. I also installed `man-db`, `man-pages`, and `texinfo` using `pacstrap -K /mnt man-db man-pages texinfo`.
 
-**Step 6 continued**
+**Step 6 continued**<br>
 I re-entered chroot with `arch-chroot /mnt`. I typed `vim /etc/locale.gen` and uncommented `en_US.UTF-8 UTF-8`. Then I generated the locale by running `locale-gen`. Then I created `locale.conf` and set LANG to `en_US.UTF-8` using `echo "LANG=en_US.UTF-8" > /etc/locale.conf`.
 
 Then I created the hostname file using `echo "Sphinx" > /etc/hostname`.
@@ -133,7 +133,7 @@ I checked my loader configuration with `cat /boot/loader/loader.conf` and edited
 
 Then I left chroot with `exit`, ran `umount -R /mnt`, and ran `reboot`.
 
-**Step 7: Installing a DE**
+**Step 7: Installing a DE**<br>
 I logged in and tried updating the package database  with `pacman -Syu` to no avail. I checked that I had an ip address with `ip addr`. Then I checked if DNS works with `ping -c 3 8.8.8.8`. This failed, meaning my installed system doesn't have a working network interface. So I checked what network devices I had with `ip link` and brought the Ethernet interface I had up with `ip link set enp0s1 up`. I checked if systemd-networkd was running with `systemctl status systemd-networkd` and enabled it for future boots with `systemctl enable systemd-networkd`. I created a DHCP configuration for `enp0s1` by making the file `/etc/systemd/network/20-wired.network` and putting `[Match]
 `Name=enp0s1`
 `[Network]`
@@ -154,7 +154,7 @@ so apparently I still need to REDO THE ARCH INSTALL because ~~I'm~~ it is ~~a~~ 
 
 what the actual
 
-**Step 2: repair mode**
+**Step 2: repair mode**<br>
 So now I have to create a new VM I guess???
 
 I created a new VM, selecting Virtualize and Linux. I did not select Use Apple Virtualization or Boot from kernel image. I enabled Hardware OpenGL acceleration. I gave it the same amount of memory, cores and storage as the previous one. Then I went to its settings and imported the disk from the previous VM.
@@ -163,7 +163,7 @@ I mounted the root and boot partitions of the old system with `mount /dev/vdb2 /
 
 Ok so now I'm thinking the issue is that I've been using commands for x86 when the system is ARM.
 
-**Step 2/3/4/6 for real: NEW VM TIME**
+**Step 2/3/4/6 for real: NEW VM TIME**<br>
 I created a new VM again, selecting Emulate and Linux. I used the same ISO, selected ARM64 (aarch64) for Architecture, and selected QEMU 9.1 ARM Virtual Machine (alias of virt-9.1) (virt). I gave 2048 MiB of memory, 2 CPU cores, 10 GiB of storage, and enabled hardware OpenGL acceleration. I imported the disk from the oldest VM, using VirtIO as the interface and turning off removability.
 
 I mounted the old root and boot. Then I bound system mounts using
@@ -197,7 +197,7 @@ I mounted the root filesystem using `mount /dev/vda2 /mnt` and  `mount /dev/vda1
 `http://os.archlinuxarm.org/os/ArchLinuxARM-aarch64-latest.tar.gz`. I made a temporary directory to unpack the keyring files. Then I extracted the keyring directory from the tarball using `tar -xzf ArchLinuxARM-aarch64-latest.tar.gz -C alaroot ./usr/share/pacman/keyrings`. I copied the keyring files into the installed system using `cp /usr/share/pacman/keyrings/* /mnt/usr/share/pacman/keyrings/
  Then I chrooted. Using `pacman-key --populate archlinuxarm` I repopulated the newly installed keyring. I verified the keyring is trusted using `pacman-key --list-keys | grep -i arch`. I updated with `pacman -Syy` and `pacman -S archlinuxarm-keyring`. Then I overwrote them with `pacman -S archlinuxarm-keyring --overwrite="*"`. I fully updated the system with `pacman -Syu`. SUCCESS! FINALLY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-**Step 7: Installing a DE Successfully?!**
+**Step 7: Installing a DE Successfully?!**<br>
 In the conflagration of my joy I powered off my VM, so I had to boot in to the live system, remount my partitions with `mount /dev/vda2 /mnt` and `mount /dev/vda1 /mnt/boot`. Then I bind mounted the system directories with 
 `mount --bind /dev /mnt/dev
 `mount --bind /proc /mnt/proc`
@@ -214,16 +214,16 @@ I then exited chroot, tried unmounting all partitions with `umount -R /mnt`, and
 
 I logged into the root account and opened QTerminal.
 
-**Step 8: Creating User Accounts**
+**Step 8: Creating User Accounts**<br>
 I used `useradd -m -G wheel catherine` and `useradd -m -G wheel codi` to add myself and codi as sudo users.
 
-**Step 9: Installing a Different Shell**
+**Step 9: Installing a Different Shell**<br>
 I installed `fish` with `pacman -S fish`.
 
-**Step 10: Installing ssh**
+**Step 10: Installing ssh**<br>
 I installed `ssh` with `pacman -S openssh`. I started the `ssh` daemon using `systemctl start sshd` and enabled `ssh` to start on boot with `systemctl enable sshd`.
 
-**Step 11: Add Color Coding to Terminal**
+**Step 11: Add Color Coding to Terminal**<br>
 To get similar colors to the live ISO, I installed `bash-completion` and `coreutils` with `pacman -S bash-completion coreutils`. I copied the Arch ISO default bash configuration using `cp /etc/skel/.bashrc ~/.bashrc` and reloaded it with `source ~/.bashrc`. No color appeared.
 I ran `pacman -S qtermwidget qterminal lxqt-themes`. That didn't do anything so I tried to add
 `[General]`
@@ -239,13 +239,13 @@ No but actually the real way to color the terminal is to run `vim ~/.bashrc` and
 
 Also since I changed this disk to be the first drive in the list of Drives in the VM configuration, it already automatically boots into the GUI desktop environment.
 
-**Step 12: Add Some Aliases**
+**Step 12: Add Some Aliases**<br>
 I added `alias fresh='pacman -Syu'`. I also added `alias c='clear'` and `alias h='history` . I added these alias to the `~/.bashrc` file to make them permanent.
 
-**Step 13: Install Browser**
+**Step 13: Install Browser**<br>
 I forgot to install a browser earlier, so I did it now using `pacman -S firefox`.
 
-**Step 14: Install AUR package**
+**Step 14: Install AUR package**<br>
 I did not install an AUR package yet either. I chose to install the `hollywood` package. To do so, I first installed `base-devel`. Then I tried cloning its repository with `git clone https://aur.archlinux.org/hollywood.git`. I did not have git, so I installed it using `pacman -S git`. It failed so I tried updating the mirrorlist so that it includes
 `Server = http://mirror.archlinuxarm.org/$arch/$repo`
 `Server = http://de3.mirror.archlinuxarm.org/$arch/$repo`
