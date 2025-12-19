@@ -65,13 +65,13 @@ I logged into the web interface using the password I set earlier. Then I created
 I downloaded the WireGuard app on my phone. Then I added a tunnel using the `Create from QR code` option. I scanned the QR code of my client.
 
 Before I activated the VPN tunnel, my IP address was:
-![[IMG_2094.jpeg]]
+![wahhh](IMG_2094.jpeg)
 
 Once I activated it on the WireGuard application interface,
-![[IMG_2096 1.jpeg]]
+![wahhh](IMG_2096.jpeg)
 
 my IP address was:
-![[IMG_2095.jpeg]]
+![wahhh](IMG_2095.jpeg)
 
 **Step 11: Testing on Laptop**<br>
 I downloaded the configuration files for my VPN. I installed WireGuard on my MacBook. Then I imported a tunnel from the configuration files.
