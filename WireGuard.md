@@ -77,10 +77,10 @@ my IP address was:
 I downloaded the configuration files for my VPN. I installed WireGuard on my MacBook. Then I imported a tunnel from the configuration files.
 
 Before I activated the VPN tunnel, my IP address was:
-![[Screenshot 2025-12-18 at 6.55.54 PM.png]]
+![wahhh](IP.png)
 
 Once I activated it on the WireGuard application interface,
-![[Screenshot 2025-12-18 at 7.04.28 PM 1.png]]
+![wahhh](ActiveLaptop.png)
 
 my IP address was:
-![[Screenshot 2025-12-18 at 7.09.32 PM.png]]
+![wahhh](VPNIP.png)
