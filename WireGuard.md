@@ -1,4 +1,5 @@
 ---
+theme: jekyll-theme-minimal
 layout: page
 title: "Project 3- WireGuard Lab"
 permalink: /wireguard
@@ -8,6 +9,7 @@ permalink: /wireguard
 
 
 **Step 1: Create a Digital Ocean Account**
+
 I set up an account using https://m.do.co/c/d33d59113ab6.
 
 **Step 2: Create an Ubuntu 24.04 Droplet**
