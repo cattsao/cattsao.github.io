@@ -1,3 +1,8 @@
+---
+title: "Project 2- Docker Compose Lab"
+permalink: /dockercompose
+---
+
 # Project 2- Docker Compose
 
 
