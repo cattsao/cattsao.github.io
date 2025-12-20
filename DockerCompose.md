@@ -37,8 +37,7 @@ sudo apt update
 I installed the official Docker packages using `sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin`.
 
 **Step 4: Set Up Application of Choice**<br>
-I decided to install the [Example Voting App](https://github.com/dockersamples/example-voting-app). First, I cloned the repository with `https://github.com/dockersamples/example-voting-app.git`. Then I changed directories into it. To build necessary images and start services, I ran `sudo docker compose up --build`, but it didn't work.
-
+I decided to install the [Example Voting App](https://github.com/dockersamples/example-voting-app), which has a `docker-compose.yml` of
 ````bash
 # version is now using "compose spec"
 # v2 and v3 are now combined!
@@ -137,7 +136,7 @@ networks:
   front-tier:
   back-tier:
 ````
-
+First, I cloned the repository with `https://github.com/dockersamples/example-voting-app.git`. Then I changed directories into it. To build necessary images and start services, I ran `sudo docker compose up --build`, but it didn't work.
 
 To fix the issue, I ran ip link and saw my MTU was too large. To reduce the size I edited the `/etc/docker.daemon.json` to include "mtu": 1300. I tried restarting Docker and testing it with `sudo docker run hello-world` but it still wasn't working. 
 
