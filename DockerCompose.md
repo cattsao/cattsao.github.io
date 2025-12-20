@@ -7,12 +7,6 @@ I ran `sudo apt remove $(dpkg --get-selections docker.io docker-compose docker-c
 
 **Step 2: Set up Docker's `apt` repository**
 I ran these commands to add Docker's official GPG key.
-`sudo apt update`
-`sudo apt install ca-certificates curl`
-`sudo install -m 0755 -d /etc/apt/keyrings`
-`sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc`
-`sudo chmod a+r /etc/apt/keyrings/docker.asc`
-
 ```bash
 sudo apt update
 sudo apt install ca-certificates curl
